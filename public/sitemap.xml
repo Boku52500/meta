@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Home -->
+  <url>
+    <loc>https://metaweb.ge/</loc>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://metaweb.ge/"/>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Services overview -->
+  <url>
+    <loc>https://metaweb.ge/services/</loc>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://metaweb.ge/services/"/>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Web development service -->
+  <url>
+    <loc>https://metaweb.ge/services/saitis-damzadeba</loc>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://metaweb.ge/services/saitis-damzadeba"/>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- SEO service -->
+  <url>
+    <loc>https://metaweb.ge/services/seo</loc>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://metaweb.ge/services/seo"/>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Branding service -->
+  <url>
+    <loc>https://metaweb.ge/services/brendingi</loc>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://metaweb.ge/services/brendingi"/>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Projects / Portfolio -->
+  <url>
+    <loc>https://metaweb.ge/projects</loc>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://metaweb.ge/projects"/>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://metaweb.ge/about</loc>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://metaweb.ge/about"/>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://metaweb.ge/contact</loc>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://metaweb.ge/contact"/>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+</urlset>
