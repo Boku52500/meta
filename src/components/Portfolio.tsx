@@ -6,132 +6,20 @@ import { useNavigate } from 'react-router-dom'
 const categories = ['ყველა', 'ვებ-აპლიკაცია', 'ელ-კომერცია']
 
 const projects = [
-  {
-    category: 'ვებ-აპლიკაცია',
-    type: 'Swift Auto Import',
-    year: '2026',
-    gradient: 'from-blue-600/30 via-purple-600/20 to-transparent',
-    accent: '#3b82f6',
-    bg: '/images/swift.png',
-    size: 'small',
-  },
-  {
-    category: 'ელ-კომერცია',
-    type: 'Pendant',
-    year: '2024',
-    gradient: 'from-pink-600/30 via-rose-600/20 to-transparent',
-    accent: '#ec4899',
-    bg: '/images/pendant.png',
-    size: 'small',
-  },
-  {
-    category: 'ელ-კომერცია',
-    type: 'Vel France',
-    year: '2025',
-    gradient: 'from-amber-600/30 via-orange-600/20 to-transparent',
-    accent: '#f59e0b',
-    bg: '/images/vel-france.png',
-    size: 'small',
-  },
-  {
-    category: 'ელ-კომერცია',
-    type: 'Agro Force',
-    year: '2025',
-    gradient: 'from-cyan-600/30 via-teal-600/20 to-transparent',
-    accent: '#06b6d4',
-    bg: '/images/agro-force.png',
-    size: 'small',
-  },
-  {
-    category: 'ვებ-აპლიკაცია',
-    type: 'Zmorph',
-    year: '2023',
-    gradient: 'from-violet-600/30 via-purple-600/20 to-transparent',
-    accent: '#8b5cf6',
-    bg: '/images/zmorph.png',
-    size: 'small',
-  },
-  {
-    category: 'ელ-კომერცია',
-    type: "Jacky's",
-    year: '2022',
-    gradient: 'from-emerald-600/30 via-green-600/20 to-transparent',
-    accent: '#10b981',
-    bg: '/images/jackys.png',
-    size: 'small',
-  },
-  {
-    category: 'ვებ-აპლიკაცია',
-    type: "Pabco Gypsum",
-    year: '2023',
-    gradient: 'from-indigo-600/30 via-blue-600/20 to-transparent',
-    accent: '#6366f1',
-    bg: '/images/pabco.png',
-    size: 'small',
-  },
-  {
-    category: 'ელ-კომერცია',
-    type: "Clare",
-    year: '2022',
-    gradient: 'from-rose-600/30 via-pink-600/20 to-transparent',
-    accent: '#f43f5e',
-    bg: '/images/clare.png',
-    size: 'small',
-  },
-  {
-    category: 'ვებ-აპლიკაცია',
-    type: "Elisa Industriq",
-    year: '2024',
-    gradient: 'from-sky-600/30 via-cyan-600/20 to-transparent',
-    accent: '#0ea5e9',
-    bg: '/images/elisa-industriq.png',
-    size: 'small',
-  },
-  {
-    category: 'ვებ-აპლიკაცია',
-    type: "Manning Elliott",
-    year: '2022',
-    gradient: 'from-lime-600/30 via-emerald-600/20 to-transparent',
-    accent: '#84cc16',
-    bg: '/images/manning.png',
-    size: 'small',
-  },
-   {
-    category: 'ვებ-აპლიკაცია',
-    type: "Varner",
-    year: '2024',
-    gradient: 'from-orange-600/30 via-amber-600/20 to-transparent',
-    accent: '#f97316',
-    bg: '/images/varner.png',
-    size: 'small',
-  },
-   {
-    category: 'ვებ-აპლიკაცია',
-    type: "Warren Smith",
-    year: '2025',
-    gradient: 'from-teal-600/30 via-emerald-600/20 to-transparent',
-    accent: '#14b8a6',
-    bg: '/images/warren-smith.png',
-    size: 'small',
-  },
-   {
-    category: 'ელ-კომერცია',
-    type: "Velor",
-    year: '2025',
-    gradient: 'from-yellow-500/30 via-amber-600/20 to-transparent',
-    accent: '#eab308',
-    bg: '/images/velor.png',
-    size: 'small',
-  },
-  {
-    category: 'ვებ-აპლიკაცია',
-    type: "Green IT Solution",
-    year: '2024',
-    gradient: 'from-green-600/30 via-emerald-600/20 to-transparent',
-    accent: '#22c55e',
-    bg: '/images/green-it.png',
-    size: 'small',
-  },
+  { category:'ვებ-აპლიკაცია', type:'Swift Auto Import',  year:'2026', gradient:'from-blue-600/30 via-purple-600/20 to-transparent',   accent:'#3b82f6', bg:'/images/swift.png',           size:'small', url:'https://swiftauto.ge/' },
+  { category:'ელ-კომერცია',   type:'Pendant',            year:'2024', gradient:'from-pink-600/30 via-rose-600/20 to-transparent',     accent:'#ec4899', bg:'/images/pendant.png',         size:'small', url:'https://pendant.ge/' },
+  { category:'ელ-კომერცია',   type:'Vel France',         year:'2025', gradient:'from-amber-600/30 via-orange-600/20 to-transparent',  accent:'#f59e0b', bg:'/images/vel-france.png',      size:'small', url:'https://velfrance.ge/' },
+  { category:'ელ-კომერცია',   type:'Agro Force',         year:'2025', gradient:'from-cyan-600/30 via-teal-600/20 to-transparent',    accent:'#06b6d4', bg:'/images/agro-force.png',      size:'small', url:'https://agroforce.ge/' },
+  { category:'ვებ-აპლიკაცია', type:'Zmorph',             year:'2023', gradient:'from-violet-600/30 via-purple-600/20 to-transparent', accent:'#8b5cf6', bg:'/images/zmorph.png',          size:'small', url:'https://zmorph3d.com/' },
+  { category:'ელ-კომერცია',   type:"Jacky's",            year:'2022', gradient:'from-emerald-600/30 via-green-600/20 to-transparent', accent:'#10b981', bg:'/images/jackys.png',          size:'small', url:'https://www.jackyselectronics.com/' },
+  { category:'ვებ-აპლიკაცია', type:'Pabco Gypsum',       year:'2023', gradient:'from-indigo-600/30 via-blue-600/20 to-transparent',   accent:'#6366f1', bg:'/images/pabco.png',           size:'small', url:'https://pabcogypsum.com/' },
+  { category:'ელ-კომერცია',   type:'Clare',              year:'2022', gradient:'from-rose-600/30 via-pink-600/20 to-transparent',    accent:'#f43f5e', bg:'/images/clare.png',           size:'small', url:'https://clare.pro/' },
+  { category:'ვებ-აპლიკაცია', type:'Elisa Industriq',    year:'2024', gradient:'from-sky-600/30 via-cyan-600/20 to-transparent',     accent:'#0ea5e9', bg:'/images/elisa-industriq.png', size:'small', url:'https://www.elisaindustriq.com/' },
+  { category:'ვებ-აპლიკაცია', type:'Manning Elliott',    year:'2022', gradient:'from-lime-600/30 via-emerald-600/20 to-transparent', accent:'#84cc16', bg:'/images/manning.png',         size:'small', url:'https://manningelliott.com/' },
+  { category:'ვებ-აპლიკაცია', type:'Varner',             year:'2024', gradient:'from-orange-600/30 via-amber-600/20 to-transparent', accent:'#f97316', bg:'/images/varner.png',          size:'small', url:'https://varner.com/en/' },
+  { category:'ვებ-აპლიკაცია', type:'Warren Smith',       year:'2025', gradient:'from-teal-600/30 via-emerald-600/20 to-transparent', accent:'#14b8a6', bg:'/images/warren-smith.png',    size:'small', url:'https://www.warrensmith-skiacademy.com/' },
+  { category:'ელ-კომერცია',   type:'Velor',              year:'2025', gradient:'from-yellow-500/30 via-amber-600/20 to-transparent', accent:'#eab308', bg:'/images/velor.png',           size:'small', url:'https://velor-cycling.com/en' },
+  { category:'ვებ-აპლიკაცია', type:'Green IT Solution',  year:'2024', gradient:'from-green-600/30 via-emerald-600/20 to-transparent', accent:'#22c55e', bg:'/images/green-it.png',        size:'small', url:'https://www.greenit-solution.de/en/' },
 ]
 
 function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
@@ -176,7 +64,8 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         onMouseLeave={onLeave}
         onMouseEnter={() => setHovered(true)}
         data-hover
-        className="relative rounded-2xl overflow-hidden cursor-default group depth-card h-full"
+        onClick={() => window.open(project.url, '_blank', 'noopener,noreferrer')}
+        className="relative rounded-2xl overflow-hidden cursor-pointer group depth-card h-full"
         style={{
           aspectRatio: '4/3',
           willChange: 'transform',
@@ -199,7 +88,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 20 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="glass border border-white/10 rounded-xl p-4">
+        <div className="rounded-xl p-4 border border-white/15" style={{ background:'rgba(0,0,0,0.72)' }}>
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold" style={{ color: project.accent }}>დეტალურად ნახვა</span>
             <ArrowUpRight className="w-4 h-4" style={{ color: project.accent }} />
