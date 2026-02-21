@@ -61,7 +61,7 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <button onClick={handleLogoClick} className="flex items-center group" data-hover>
-            <img src="/images/logo.png" alt="Metaweb" className="h-14 w-auto object-contain" />
+            <img src="/images/logo.png" alt="Metaweb" className="h-14 w-auto object-contain" fetchPriority="high" loading="eager" />
           </button>
 
           {/* Desktop nav */}
