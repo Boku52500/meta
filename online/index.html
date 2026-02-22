@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Metaweb — Online</title>
+  <link rel="icon" href="https://metaweb.ge/images/favicon-32x32.png" />
+  <meta name="theme-color" content="#03040b" />
+  <!-- Brand font: Space Grotesk 700 for the logo wordmark -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" />
+  <style>
+    :root {
+      --bg: #03040b;
+      --fg: #ffffff;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --cyan: #06b6d4;
+    }
+    * { box-sizing: border-box }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: radial-gradient(1200px 800px at 70% -10%, #0b1230 0%, transparent 60%),
+                  radial-gradient(1000px 700px at -10% 120%, #0a1026 0%, transparent 55%),
+                  var(--bg);
+      color: var(--fg);
+      font-family: "Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow: hidden;
+    }
+    canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+    .vignette { position: fixed; inset: 0; pointer-events: none; z-index: 0; background: radial-gradient(ellipse 70% 80% at 50% 50%, transparent 20%, rgba(3,4,11,0.75) 100%); }
+    .center {
+      position: relative; z-index: 1; height: 100%; width: 100%;
+      display: grid; place-items: center; text-align: center; padding: 24px;
+    }
+    .stack { display: grid; gap: 22px; }
+    h1 {
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: clamp(40px, 7.5vw, 96px);
+      line-height: .9;
+      text-shadow: 0 0 35px rgba(139,92,246,0.25);
+    }
+    h1 .meta { color: #fff; text-shadow: 0 0 18px rgba(255,255,255,0.2); }
+    h1 .web { color: var(--purple); text-shadow: 0 0 26px rgba(139,92,246,0.45); }
+    .btn {
+      justify-self: center;
+      appearance: none; -webkit-appearance: none;
+      border: 0; outline: none; cursor: pointer;
+      padding: 16px 40px; border-radius: 18px; font-weight: 700; font-size: clamp(16px, 1.8vw, 20px);
+      color: white; text-decoration: none;
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+      box-shadow: 0 10px 30px rgba(59,130,246,0.25);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(59,130,246,0.35); }
+    .hint { opacity: .45; font-size: 12px; margin-top: -8px; }
+    @media (prefers-reduced-motion: reduce) {
+      .btn { transition: none }
+    }
+    /* Hide cursor on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+      body, a, button { cursor: none !important; }
+    }
+    /* Mobile sizing: adjust heading and button smaller */
+    @media (max-width: 480px) {
+      h1 { font-size: clamp(36px, 12vw, 60px); letter-spacing: -0.01em; }
+      .btn { padding: 16px 36px; border-radius: 18px; font-size: clamp(16px, 5vw, 20px); }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <main class="center">
+    <div class="stack">
+      <h1><span class="meta">Meta</span><span class="web">Web</span></h1>
+      <a class="btn" href="https://metaweb.ge" rel="noopener">Enter</a>
+      <div class="hint">online.metaweb.ge</div>
+    </div>
+  </main>
+
+  <script>
+    (function(){
+      const canvas = document.getElementById('bg')
+      const ctx = canvas.getContext('2d')
+      let W = 0, H = 0
+
+      // Match the Hero GridWarp parameters
+      const NR = 26   // horizontal lines
+      const NC = 32   // vertical lines
+      const SX = 60   // samples per horizontal line
+      const NEAR = 0.6, FAR = 16, XH = 9
+
+      const mouse = { x: -9999, y: -9999 }
+      let raf = 0, last = 0
+
+      function resize() {
+        W = canvas.offsetWidth; H = canvas.offsetHeight
+        canvas.width = W; canvas.height = H
+      }
+      resize()
+      window.addEventListener('resize', resize, { passive: true })
+
+      window.addEventListener('mousemove', (e) => {
+        const rc = canvas.getBoundingClientRect()
+        mouse.x = e.clientX - rc.left
+        mouse.y = e.clientY - rc.top
+      }, { passive: true })
+
+      function draw(ts) {
+        // 30fps throttle like the Hero
+        if (ts - last < 33) { raf = requestAnimationFrame(draw); return }
+        last = ts
+
+        const t = ts / 1000
+        const mx = mouse.x, my = mouse.y
+        const hasMouse = mx > -100
+
+        ctx.fillStyle = '#02030a'
+        ctx.fillRect(0, 0, W, H)
+
+        const horizY = H * 0.40
+        const focal  = W * 0.52
+
+        const depth = (r) => FAR * Math.pow(NEAR / FAR, r / (NR - 1))
+        const baseY = (r) => horizY + focal / depth(r)
+        const pscale = (r) => focal / depth(r)
+
+        const wave = (sx, d) => {
+          const nx = sx / W
+          return (Math.sin(nx * 5.5 + t * 0.65) * 0.07
+                + Math.sin(nx * 10  - t * 0.50) * 0.035
+                + Math.cos(nx * 3.5 + t * 0.38) * 0.05) * (focal / d) * 0.55
+        }
+
+        const gravity = (sx, sy) => {
+          if (!hasMouse) return { dx: 0, dy: 0 }
+          const dx = sx - mx, dy = sy - my
+          const d2 = dx * dx + dy * dy
+          const R  = 210
+          if (d2 > R * R) return { dx: 0, dy: 0 }
+          const d = Math.sqrt(d2)
+          const f = (1 - d / R) * (1 - d / R) * 55
+          return { dx: -(dx / d) * f, dy: -(dy / d) * f }
+        }
+
+        // Horizontal lines
+        for (let r = 0; r < NR; r++) {
+          const d  = depth(r)
+          const by = baseY(r)
+          if (by > H + 30 || by < horizY - 5) continue
+          const ps   = pscale(r)
+          const frac = r / (NR - 1)           // 0=far, 1=near
+          const hue  = 210 - frac * 30        // 210→180
+          const alph = 0.15 + frac * 0.55
+
+          ctx.beginPath()
+          for (let s = 0; s <= SX; s++) {
+            const fx  = s / SX
+            const wx  = -XH + 2 * XH * fx
+            const sx  = W / 2 + wx * ps
+            const wy  = wave(sx, d)
+            const { dx, dy } = gravity(sx, by + wy)
+            const px  = sx + dx, py = by + wy + dy
+            s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py)
+          }
+          ctx.strokeStyle = `hsla(${hue},100%,65%,${alph})`
+          ctx.lineWidth   = 0.5 + frac * 1.0
+          ctx.stroke()
+        }
+
+        // Vertical lines
+        for (let c = 0; c < NC; c++) {
+          const wx   = -XH + 2 * XH * (c / (NC - 1))
+          const isCenter = c === Math.floor(NC / 2)
+          ctx.beginPath()
+          for (let r = 0; r < NR; r++) {
+            const d  = depth(r)
+            const by = baseY(r)
+            if (by > H + 30) continue
+            const ps = pscale(r)
+            const sx = W / 2 + wx * ps
+            const wy = wave(sx, d)
+            const { dx, dy } = gravity(sx, by + wy)
+            r === 0 ? ctx.moveTo(sx + dx, by + wy + dy)
+                    : ctx.lineTo(sx + dx, by + wy + dy)
+          }
+          const alph = isCenter ? 0.45 : 0.18
+          ctx.strokeStyle = `hsla(220,100%,65%,${alph})`
+          ctx.lineWidth   = isCenter ? 0.9 : 0.5
+          ctx.stroke()
+        }
+
+        // Horizon glow
+        const hg = ctx.createLinearGradient(0, horizY - 12, 0, horizY + 50)
+        hg.addColorStop(0,   'transparent')
+        hg.addColorStop(0.3, 'rgba(80,160,255,0.18)')
+        hg.addColorStop(0.55,'rgba(140,80,255,0.12)')
+        hg.addColorStop(1,   'transparent')
+        ctx.fillStyle = hg; ctx.fillRect(0, horizY - 12, W, 62)
+
+        // Scan line
+        const scanFrac = (t * 0.28) % 1
+        const scanY = H - (H - horizY) * scanFrac
+        if (scanFrac < 0.97) {
+          const sg = ctx.createLinearGradient(0, scanY - 10, 0, scanY + 6)
+          sg.addColorStop(0,   'transparent')
+          sg.addColorStop(0.45,'rgba(120,210,255,0.14)')
+          sg.addColorStop(1,   'transparent')
+          ctx.fillStyle = sg; ctx.fillRect(0, scanY - 10, W, 16)
+        }
+
+        // Side vignettes
+        const lv = ctx.createLinearGradient(0, 0, W * 0.18, 0)
+        lv.addColorStop(0, 'rgba(2,3,10,0.85)'); lv.addColorStop(1, 'transparent')
+        ctx.fillStyle = lv; ctx.fillRect(0, 0, W * 0.18, H)
+        const rv = ctx.createLinearGradient(W, 0, W * 0.82, 0)
+        rv.addColorStop(0, 'rgba(2,3,10,0.85)'); rv.addColorStop(1, 'transparent')
+        ctx.fillStyle = rv; ctx.fillRect(W * 0.82, 0, W * 0.18, H)
+
+        // Sky fade above horizon
+        const sky = ctx.createLinearGradient(0, 0, 0, horizY)
+        sky.addColorStop(0, 'rgba(2,3,10,0.98)'); sky.addColorStop(1, 'transparent')
+        ctx.fillStyle = sky; ctx.fillRect(0, 0, W, horizY)
+
+        // Cursor gravity glow
+        if (hasMouse) {
+          const g = ctx.createRadialGradient(mx, my, 0, mx, my, 210)
+          g.addColorStop(0,   'rgba(100,200,255,0.10)')
+          g.addColorStop(0.5, 'rgba(80,130,255,0.04)')
+          g.addColorStop(1,   'transparent')
+          ctx.fillStyle = g; ctx.fillRect(0, 0, W, H)
+        }
+
+        raf = requestAnimationFrame(draw)
+      }
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (reduce) {
+        // Render a single static frame
+        requestAnimationFrame(draw)
+      } else {
+        raf = requestAnimationFrame(draw)
+      }
+    })();
+  </script>
+</body>
+</html>
