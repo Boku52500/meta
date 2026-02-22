@@ -37,7 +37,7 @@ body {
 }
 
 /* Override Tailwind heading font to use global face */
-.font-display { font-family: 'Eurostile GEO', 'Inter', system-ui, sans-serif; }
+.font-display { font-family: 'Eurostile GEO', 'Inter', system-ui, sans-serif; font-style: italic; font-weight: 600; }
 
 /* Hide scrollbar utility */
 .scrollbar-none { scrollbar-width: none; }
@@ -179,6 +179,16 @@ body {
 /* Custom cursor restore for inputs */
 input, textarea, select, a, button {
   cursor: none;
+}
+
+/* Mobile/touch devices: restore default cursor behavior and use system font for maximum readability */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+  input, textarea, select, a, button { cursor: auto; }
+  .custom-cursor { display: none !important; }
 }
 
 @keyframes gradient-shift {

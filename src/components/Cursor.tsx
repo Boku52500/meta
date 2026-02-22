@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 
 export default function Cursor() {
+  const isCoarse = typeof window !== 'undefined' && (
+    ('matchMedia' in window && (window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer: coarse)').matches)) ||
+    ('ontouchstart' in window) ||
+    (typeof navigator !== 'undefined' && (navigator.maxTouchPoints || 0) > 0)
+  )
+  if (isCoarse) return null
+
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
   const [isHovering, setIsHovering] = useState(false)
@@ -45,7 +52,7 @@ export default function Cursor() {
       {/* Inner dot */}
       <div
         ref={dotRef}
-        className="fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-transform duration-75"
+        className="custom-cursor fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-transform duration-75"
         style={{
           width: isClicking ? '6px' : '8px',
           height: isClicking ? '6px' : '8px',
@@ -59,7 +66,7 @@ export default function Cursor() {
       {/* Outer ring */}
       <div
         ref={ringRef}
-        className="fixed pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2"
+        className="custom-cursor fixed pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2"
         style={{
           width: isHovering ? '48px' : isClicking ? '24px' : '36px',
           height: isHovering ? '48px' : isClicking ? '24px' : '36px',
