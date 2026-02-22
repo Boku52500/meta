@@ -17,6 +17,13 @@
   font-style: italic;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Eurostile GEO';
+  src: url('/fonts/eurostile-lt-std-geo-mt-demi-italic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
 
 * {
   margin: 0;
@@ -32,6 +39,10 @@ body {
   background-color: var(--bg-primary);
   color: #ffffff;
   font-family: 'Eurostile GEO', 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
   cursor: none;
 }
@@ -185,7 +196,6 @@ input, textarea, select, a, button {
 @media (hover: none) and (pointer: coarse) {
   body {
     cursor: auto;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
   }
   input, textarea, select, a, button { cursor: auto; }
   .custom-cursor { display: none !important; }

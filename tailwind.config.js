@@ -20,8 +20,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'Inter', 'sans-serif'],
+        sans: ['Eurostile GEO', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Eurostile GEO', 'Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         'gradient-shift': 'gradient-shift 4s ease infinite',
